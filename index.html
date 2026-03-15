@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dongwan ♥ Heesang Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:'Noto Serif KR',serif;
+background:#f6f3ee;
+color:#333;
+text-align:center;
+}
+
+.section{
+padding:60px 20px;
+}
+
+h2{
+margin-bottom:20px;
+font-weight:500;
+}
+
+.envelope-wrap{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+
+.envelope{
+width:320px;
+cursor:pointer;
+perspective:1000px;
+}
+
+.flap{
+width:100%;
+height:160px;
+background:#1b1b1b;
+clip-path:polygon(0 0,100% 0,50% 100%);
+transition:0.8s;
+transform-origin:top;
+}
+
+.letter{
+background:white;
+padding:40px 20px;
+display:none;
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+.open .flap{
+transform:rotateX(180deg);
+}
+
+.open .letter{
+display:block;
+animation:fade 1s;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1}
+}
+
+.name{
+font-family:'Great Vibes',cursive;
+font-size:42px;
+margin:20px 0;
+}
+
+.main-photo{
+width:100%;
+max-width:420px;
+border-radius:10px;
+margin:auto;
+}
+
+.gallery{
+display:flex;
+overflow-x:auto;
+gap:10px;
+padding:10px;
+}
+
+.gallery img{
+height:200px;
+border-radius:10px;
+}
+
+.countdown{
+font-size:24px;
+margin-top:20px;
+font-weight:500;
+}
+
+.button{
+display:inline-block;
+padding:12px 20px;
+margin:8px;
+background:#222;
+color:white;
+border-radius:30px;
+text-decoration:none;
+font-size:14px;
+}
+
+.footer{
+padding:40px;
+font-size:14px;
+color:#777;
+}
+
+audio{
+display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope-wrap" id="cover">
+
+<div class="envelope" onclick="openInvite()">
+<div class="flap"></div>
+
+<div class="letter">
+<p>SAVE THE DATE</p>
+
+<div class="name">
+Dongwan<br>&<br>Heesang
+</div>
+
+<p>
+2026.04.18 SAT<br>
+18:30
+</p>
+
+<p style="font-size:13px;color:#777">봉투를 눌러 초대장을 열어주세요</p>
+
+</div>
+</div>
+</div>
+
+<div id="content" style="display:none">
+
+<div class="section">
+<img src="main.jpg" class="main-photo">
+</div>
+
+<div class="section">
+<h2>초대합니다</h2>
+
+<p>
+따스한 봄날<br>
+저희 두 사람이 하나의 가정을 이루려 합니다.<br><br>
+
+귀한 걸음으로 함께 하셔서<br>
+새로운 시작을 축복해 주세요.
+</p>
+</div>
+
+<div class="section">
+<h2>Wedding Day</h2>
+
+<p>
+2026년 4월 18일 토요일<br>
+오후 6시 30분
+</p>
+
+<div class="countdown" id="countdown"></div>
+</div>
+
+<div class="section">
+
+<h2>Gallery</h2>
+
+<div class="gallery">
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+<img src="photo5.jpg">
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Location</h2>
+
+<p>빌라드지디 청담</p>
+
+<a class="button" href="https://map.naver.com">네이버지도</a>
+<a class="button" href="https://maps.google.com">구글지도</a>
+
+</div>
+
+<div class="footer">
+Dongwan ♥ Heesang Wedding
+</div>
+
+</div>
+
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function openInvite(){
+document.querySelector(".envelope").classList.add("open")
+
+setTimeout(()=>{
+document.getElementById("cover").style.display="none"
+document.getElementById("content").style.display="block"
+},900)
+}
+
+const weddingDate = new Date("2026-04-18T18:30:00")
+
+function updateCountdown(){
+
+const now = new Date()
+const diff = weddingDate - now
+
+const d = Math.floor(diff/(1000*60*60*24))
+const h = Math.floor((diff/(1000*60*60))%24)
+const m = Math.floor((diff/(1000*60))%60)
+
+document.getElementById("countdown").innerHTML =
+"D‑Day까지 "+d+"일 "+h+"시간 "+m+"분"
+}
+
+setInterval(updateCountdown,1000)
+
+</script>
+
+</body>
+</html>
